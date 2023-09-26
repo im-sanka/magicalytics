@@ -1,41 +1,36 @@
-# Hacktoberfest 2023 project: building ETL and RAG pipelines with open source 
+# Hacktoberfest 2023 project
+## Title: Magicalytics!
 
-## Set up /  Configuración
+## Theme:
+Extract Transform Load (ETL) pipeline with analytics components.
 
-There should be one GitHub repository per team. /  Debería haber un repositorio de GitHub por equipo.
+## Description
+This project aims **to provide analytics pipeline which magically turn dataset from different sources into a summary of analytics dashboard with insights**!
 
-**Ensure all team members have completed all steps in the [set up](setup.md) document.**
+The example data is obtained from Kaggle and the link can be found here [will be added] and here [will be added].
 
-**Asegúrate de que todos los miembros del equipo hayan completado todos los pasos en el [documento de configuración](setup-espanol.md).**
+The tools which will be used are:
+- JupySQL
+- Haystack
+- Poetry
+- Streamlit
 
-## Theme of your project / Tema de tu proyecto
+*The outcome of this project is web analytical dashboard which*
+- Provide a description of your project. Include the data sources you are using, the tools you are using, and the expected outcome of your project.
 
-1. Extract Transform Load (ETL) pipeline with an analytics component / Pipeline de Extracción, Transformación y Carga (ETL) con un componente analítico
-2. Extract Transform Load (ETL) pipeline with a machine learning (ML) component  / Pipeline de Extracción, Transformación y Carga (ETL) con un componente de aprendizaje automático (ML)
-3. Retrieval Augmented Generation (RAG) pipeline for question answering /  Pipeline de Generación Aumentada por Recuperación (RAG) para responder preguntas
-4. Retrieval Augmented Generation (RAG) pipeline for chatbot /  Pipeline de Generación Aumentada por Recuperación (RAG) para chatbot
+## Data sources 
 
-## Description / Descripción 
-
-Provide a description of your project. Include the data sources you are using, the tools you are using, and the expected outcome of your project.
-
-Proporcione una descripción de su proyecto. Incluya las fuentes de datos que está utilizando, las herramientas que está utilizando y el resultado esperado de su proyecto.
-
-## Data sources / Fuentes de datos
-
-Provide a detailed description of your data sources. Please ensure you work only with open source data. Include a link to the data you are working with. 
-
-Agregue una descripción detallada de sus fuentes de datos. Asegúrese de trabajar solo con datos de código abierto. Incluya un enlace a los datos con los que está trabajando.
-
-**Do not upload data to GitHub** / **No suba datos a GitHub**
+For this project, I use data from Kaggle that describe ....
 
 ## Methods / Métodos
 
-Describe the methods you are using. Include a description of the tools you are using.
+The methods that I use is shown in the figure below.
 
-Describa los métodos que está utilizando. Incluya una descripción de las herramientas que está utilizando.
+Figure here
 
-## User interface your project will have / Interfaz de usuario que tendrá su proyecto
+Description for each step is added here....
+
+## User interface
 
 Describe the user interface your project will have. Include a description of the tools you are using.
 
@@ -45,16 +40,5 @@ Options:
 2. Chainlit application
 3. Voila dashboard
 
-Describa la interfaz de usuario que tendrá su proyecto. Incluya una descripción de las herramientas que está utilizando.
-
-Opciones:
-
-1. Aplicación FastAPI
-2. Aplicación Chainlit
-3. Tablero Voila
-
-## Team members/ Miembros del equipo
-
-Add the names and GitHub IDs of your team members here.
-
-Agregue los nombres y las ID de GitHub de los miembros de su equipo aquí.
+## Team members
+For this project, I am the only one who is working on it! :)
