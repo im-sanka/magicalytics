@@ -7,13 +7,13 @@ Extract Transform Load (ETL) pipeline with analytics components.
 ## Description
 This project aims **to provide analytics pipeline which magically turn dataset from different sources into a summary of analytics dashboard with insights**!
 
-The example data is obtained from Kaggle and the link can be found here [will be added] and here [will be added].
+The example data is obtained from Google BigQuery and the link can be found [here](https://console.cloud.google.com/marketplace/product/bigquery-public-datasets/google-search-trends).
 
 The tools which will be used are:
 - JupySQL
 - Poetry
 - Google Analytics API
-- Kaggle API
+- Google BigQuery API
 - will add more ....
 
 *The outcome of this project is web analytical dashboard which*
