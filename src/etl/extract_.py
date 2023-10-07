@@ -6,12 +6,13 @@
 from google.cloud import bigquery
 import os
 import duckdb
+from credentials import credentials
 
-def get_data_bigquery(query):
+def get_data_bigquery(query, credentials):
     """
     This works to pull the data from BigQuery and make it as a dataframe.
     """
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/Users/immanuelsanka/Desktop/Medium/magicalytics/.bigquery/magicalytics.json"
+    credentials
     client = bigquery.Client()
     query_job = client.query(query)
     df = query_job.to_dataframe()
@@ -55,7 +56,7 @@ if __name__ == "__main__":
         FROM `bigquery-public-data.google_trends.international_top_rising_terms`
         WHERE country_name = 'Indonesia' 
         GROUP BY refresh_date, region_name, score, rank, term, percent_gain
-        """)
+        """, credentials())
 
     table_schema = """
     (
