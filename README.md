@@ -11,9 +11,10 @@ The example data is obtained from Kaggle and the link can be found here [will be
 
 The tools which will be used are:
 - JupySQL
-- Haystack
 - Poetry
-- Streamlit
+- Google Analytics API
+- Kaggle API
+- will add more ....
 
 *The outcome of this project is web analytical dashboard which*
 - Provide a description of your project. Include the data sources you are using, the tools you are using, and the expected outcome of your project.
@@ -21,12 +22,13 @@ The tools which will be used are:
 ## Data sources 
 
 For this project, I use data from Kaggle that describe ....
+However, you can also use both single .csv file or any database in Kaggle/ Google Analytics.
 
-## Methods / Métodos
+## Methods
 
 The methods that I use is shown in the figure below.
 
-Figure here
+Workflow figure will be added here
 
 Description for each step is added here....
 
@@ -36,9 +38,9 @@ Describe the user interface your project will have. Include a description of the
 
 Options: 
 
-1. FastAPI application
-2. Chainlit application
-3. Voila dashboard
+1. Voila dashboard
+2. or, might think something else later
 
 ## Team members
 For this project, I am the only one who is working on it! :)
+Feel free to visit my site as well www.sanka.studio
