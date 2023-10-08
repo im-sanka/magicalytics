@@ -72,6 +72,6 @@ if __name__ == "__main__":
 
     con = add_data_to_duckdb(df, table_schema)
 
-    # Example: Fetch data from one of the tables (e.g., rank 1) to verify
+    # Just checking the table in the database
     result = con.execute("SELECT * FROM google_trends_data_rank_1").fetchdf()
     print(result.head())
