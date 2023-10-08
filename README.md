@@ -1,7 +1,7 @@
 # Hacktoberfest 2023 project
 ## Magicalytics!
 
-## Theme:
+## Theme
 Extract Transform Load (ETL) pipeline with analytics components.
 
 ## Description
