@@ -36,7 +36,7 @@ Workflow figure will be added here
 3. Splitting the data into different tables based on ranking and deposited as .duckdb database.
 4. Building the Exploratory Data Analysis (EDA) pipeline.
 5. Making _unique_ analysis using NLP algorithm and other machine learning algorithms.
-6. Adding RAG feature to communicate users with analyzed data.
+6. Adding RAG feature to bridge the communication between users and analyzed data.
 7. Building dashboard for whole visualization and data summary.
 8. Deployment via Ploomber.
 
