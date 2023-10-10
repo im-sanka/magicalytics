@@ -1,61 +1,55 @@
-# after browsing the database, turned out the data source is not from Kaggle but bigquery public data
-# import kaggle
-# kaggle.api.authenticate()
-# kaggle.api.dataset_download_files('data:google_analytics_sample', path='./', unzip=True)
-
 from google.cloud import bigquery
 import os
 import duckdb
 from credentials import credentials
 
-def get_data_bigquery(query, credentials):
+def get_data_bigquery(country:str, credentials):
     """
-    This works to pull the data from BigQuery and make it as a dataframe.
+    Pull data from BigQuery and return it as a dataframe.
     """
-    credentials
-    client = bigquery.Client()
+    client = bigquery.Client(credentials=credentials)
+
+    query = f"""
+                SELECT refresh_date, region_name, score, term, rank, COUNT(rank) as group_in_rank, percent_gain
+                FROM `bigquery-public-data.google_trends.international_top_rising_terms`
+                WHERE country_name = '{country}'
+                GROUP BY refresh_date, region_name, score, rank, term, percent_gain
+            """
+    
     query_job = client.query(query)
     df = query_job.to_dataframe()
-    df = df.sort_values(by='rank')
     df['refresh_date'] = df['refresh_date'].astype(str)
+
     return df
 
-def add_data_to_duckdb(df, table_schema):
-    """
-    This puts the dataframe into duckdb format where it will host many tables based on ranks.
-    So, it has 25 tables in the final database.
-    """
-    folder_path = 'data_folder'  # Specify your desired folder name here
+def add_to_duckdb(name, df, table_name):
+    folder_path = 'data_folder'
     if not os.path.exists(folder_path):
-        os.makedirs(folder_path)  # Create the folder if it doesn't exist
+        os.makedirs(folder_path)
 
-    db_path = os.path.join(folder_path, 'test_data.duckdb')
-    con = duckdb.connect(database=db_path, read_only=False)
+    db_path = os.path.join(folder_path, f'{name}.duckdb')
+    conn = duckdb.connect(db_path)
+    conn.register('df', df)
+    conn.execute(f'CREATE TABLE "{table_name}" AS SELECT * FROM df')
 
-    return con
+    return conn
 
 if __name__ == "__main__":
     """
-    This is the main ETL commands  where it will execute the data ingestion and push the table into the database
+    Main ETL commands for data ingestion and pushing the table into the clean database.
     """
-    df = get_data_bigquery("""
-        SELECT refresh_date, region_name, score, term, rank, COUNT(rank) as group_in_rank, percent_gain
-        FROM `bigquery-public-data.google_trends.international_top_rising_terms`
-        WHERE country_name = 'Indonesia' 
-        GROUP BY refresh_date, region_name, score, rank, term, percent_gain
-        """, credentials())
+    df = get_data_bigquery("Indonesia", credentials())
+    conn = add_to_duckdb("clean_data", df, "all")
 
-    table_schema = """
-    (
-        refresh_date VARCHAR,
-        region_name VARCHAR,
-        score FLOAT,
-        term VARCHAR,
-        rank INT,
-        group_in_rank INT,
-        percent_gain FLOAT
-    )
-    """
+    query = """
+            CREATE TABLE java_data AS    
+            SELECT * 
+            FROM "all" 
+            WHERE region_name IN ('Central Java', 'Special Region of Yogyakarta', 
+            'Special Capital Region of Jakarta', 'Banten', 'Bali', 'West Java', 'East Java')
+            """
+    
+    conn.execute(query)
+    conn.close()
 
-    con = add_data_to_duckdb(df, table_schema)
-    print("Query done!")
+    print("Extract and Transform are done!")
