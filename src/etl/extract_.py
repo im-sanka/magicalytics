@@ -1,8 +1,17 @@
+# + tags=["parameters"]
+# declare a list tasks whose products you want to use as inputs
+upstream = None
+
+# -
+
+upstream = ['get']
+
 from google.cloud import bigquery
 import os
 import duckdb
-from credentials import credentials
+# from credentials import credentials
 
+# +
 def get_data_bigquery(country:str, credentials):
     """
     Pull data from BigQuery and return it as a dataframe.
@@ -22,6 +31,7 @@ def get_data_bigquery(country:str, credentials):
 
     return df
 
+# +
 def add_to_duckdb(name, df, table_name):
     folder_path = 'data_folder'
     if not os.path.exists(folder_path):
@@ -34,10 +44,15 @@ def add_to_duckdb(name, df, table_name):
 
     return conn
 
+
+# -
+
 if __name__ == "__main__":
     """
     Main ETL commands for data ingestion and pushing the table into the clean database.
     """
+    def credentials():
+        os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/Users/immanuelsanka/Desktop/Medium/magicalytics/.bigquery/magicalytics.json"
     df = get_data_bigquery("Indonesia", credentials())
     conn = add_to_duckdb("clean_data", df, "all")
 
