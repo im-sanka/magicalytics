@@ -15,11 +15,12 @@ The aim for this magicalytics is to provide insights from trend data (generated 
 The example data is obtained from Google BigQuery and the link can be found [here](https://console.cloud.google.com/marketplace/product/bigquery-public-datasets/google-search-trends).
 
 The tools which will be used are:
-- JupySQL 
 - Poetry
-- Google Analytics API
+- JupySQL 
 - Google BigQuery API
-- will add more ....
+- Voila
+- Ploomber
+- will add more later....
 
 *The outcome of this project is an analytical dashboard which can be used to process Google Analytics result and communicate with Retrieval Augmented Generation (RAG) pipeline.*
 
