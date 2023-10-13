@@ -4,8 +4,6 @@ upstream = None
 
 # -
 
-upstream = ['get']
-
 from google.cloud import bigquery
 import os
 import duckdb
@@ -33,7 +31,7 @@ def get_data_bigquery(country:str, credentials):
 
 # +
 def add_to_duckdb(name, df, table_name):
-    folder_path = 'data_folder'
+    folder_path = 'output'
     if not os.path.exists(folder_path):
         os.makedirs(folder_path)
 
