@@ -2,4 +2,3 @@ tasks:
   - source: src/etl/extract_.py
     product:
       nb: output/extract-pipeline.ipynb
-      data: src/etl/credentials.py
