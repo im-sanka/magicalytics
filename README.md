@@ -1,6 +1,6 @@
 <h1 align="center">Hacktoberfest 2023 project!</h1>
 <p align="center">
-<img src="./images/analytics.png" width="200" height="200">
+<img src="./images/analysis.png" width="200" height="200">
 <h1 align="center">Magicalytics</h1>
 This is a solo project to get to know about available open-source resources which can be used to initiate data science project. The result will be a dashboard with features to help analyzing the data.
 </p>
@@ -35,7 +35,9 @@ However, you may be able to use both single .csv file or any type of database.
 
 The methods that I use is shown in the figure below.
 
-Workflow figure will be added here
+<img src="./images/ETL_diagram.png">
+
+Workflow figure cover the ETL diagram (1-5) and the next points will be added later.
 
 1. The workflow starts from environment preparation (Conda, Poetry, APIs, etc.).
 2. Downloading the data by querying necessary tables from Google BigQuery via API.
@@ -51,7 +53,7 @@ Workflow figure will be added here
 The interface would be a Voila dashboard that host default data from the sample data mentioned above.
 The dashboard can also host uploaded data. However, uploaded data will need to be selected first, since the dashboard requires .....
 
-Figure dashboard here...
+Figure dashboard here later...
 
 [//]: # (Describe the user interface your project will have. Include a description of the tools you are using.)
 
