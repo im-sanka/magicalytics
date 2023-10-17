@@ -31,6 +31,9 @@ def get_data_bigquery(country:str, credentials):
 
 # +
 def add_or_update_duckdb(name, df, table_name):
+    """
+    Either add new database or update the database from BigQuery data
+    """
     folder_path = 'output'
     if not os.path.exists(folder_path):
         os.makedirs(folder_path)
