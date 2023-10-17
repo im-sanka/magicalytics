@@ -30,7 +30,7 @@ def get_data_bigquery(country:str, credentials):
     return df
 
 # +
-def add_to_duckdb(name, df, table_name):
+def add_or_update_duckdb(name, df, table_name):
     folder_path = 'output'
     if not os.path.exists(folder_path):
         os.makedirs(folder_path)
@@ -38,10 +38,16 @@ def add_to_duckdb(name, df, table_name):
     db_path = os.path.join(folder_path, f'{name}.duckdb')
     conn = duckdb.connect(db_path)
     conn.register('df', df)
-    conn.execute(f'CREATE TABLE "{table_name}" AS SELECT * FROM df')
+
+    # Check if table exists and decide whether to create a new table or insert data into the existing table
+    result = conn.execute(f"SELECT * FROM information_schema.tables WHERE table_name = '{table_name}';").fetchall()
+    if result:
+        conn.execute(f"DELETE FROM \"{table_name}\";")  # Clear existing table contents
+        conn.execute(f"INSERT INTO \"{table_name}\" SELECT * FROM df;")  # Insert new data
+    else:
+        conn.execute(f'CREATE TABLE "{table_name}" AS SELECT * FROM df')  # Create table if it does not exist
 
     return conn
-
 
 # -
 
@@ -52,10 +58,16 @@ if __name__ == "__main__":
     def credentials():
         os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/Users/immanuelsanka/Desktop/Medium/magicalytics/.bigquery/magicalytics.json"
     df = get_data_bigquery("Indonesia", credentials())
-    conn = add_to_duckdb("clean_data", df, "all")
 
+    conn = add_or_update_duckdb("clean_data", df, "all")
+
+    # Ensure to handle the 'java_data' table as well, checking its existence and updating/creating as needed.
+    java_data_exists = conn.execute("SELECT * FROM information_schema.tables WHERE table_name = 'java_data';").fetchall()
+    if java_data_exists:
+        conn.execute("DELETE FROM java_data;")
+    
     query = """
-            CREATE TABLE java_data AS    
+            INSERT INTO java_data    
             SELECT * 
             FROM "all" 
             WHERE region_name IN ('Central Java', 'Special Region of Yogyakarta', 
