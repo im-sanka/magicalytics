@@ -80,4 +80,8 @@ if __name__ == "__main__":
     conn.execute(query)
     conn.close()
 
+    """
+    Need to add load function to push downloaded data to motherduck here
+    """
+
     print("Extract and Transform are done!")
