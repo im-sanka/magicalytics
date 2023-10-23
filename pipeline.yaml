@@ -1,4 +1,4 @@
 tasks:
-  - source: src/etl/extract_.py
+  - source: src/etl/extract.py
     product:
       nb: output/extract-pipeline.ipynb
