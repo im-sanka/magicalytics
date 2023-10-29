@@ -1,0 +1,6 @@
+duckdb==0.9.1
+protobuf==3.20.3
+pandas
+numpy
+matplotlib
+seaborn
