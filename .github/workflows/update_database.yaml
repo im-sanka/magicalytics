@@ -1,8 +1,9 @@
 name: run extract.py
 
 on:
-  schedule:
-  - cron: '30 5 5 * *'
+  push:
+    paths:
+      - 'extract.py'
 
 jobs:
   build:
@@ -19,11 +20,7 @@ jobs:
       - name: install python packages
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
-
-      - name: run extract script
-        env:
-          MD_TOKEN: ${{ secrets.MD_TOKEN }}
+          pip install google-cloud-bigquery duckdb
 
       - name: Set up Google Cloud Credentials
         run: echo "$GCP_SA_KEY" > magicalytics.json
@@ -32,6 +29,16 @@ jobs:
 
       - name: Set Google Application Credentials
         run: echo "GOOGLE_APPLICATION_CREDENTIALS=$GITHUB_WORKSPACE/magicalytics.json" >> $GITHUB_ENV
-
-
       
+      - name: Run the extraction script
+        run: python extract.py
+        env:
+          MD_TOKEN: ${{ secrets.MD_TOKEN }}
+
+      - name: Commit and push the log file
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add script_report.txt
+          git commit -m "Update logs" -a
+          git push
