@@ -78,10 +78,7 @@ if __name__ == "__main__":
     try:
         df = get_data_bigquery("Indonesia", os.environ["GOOGLE_APPLICATION_CREDENTIALS"])
         logging.info("Data successfully fetched from BigQuery.")
-    except Exception as e:
-        logging.error(f"Error fetching data from BigQuery: {e}")
 
-    try:
         conn = add_or_update_duckdb("clean_data", df, "all")
 
         # Ensure to handle the 'java_data' table as well, checking its existence and updating/creating as needed.
@@ -97,28 +94,29 @@ if __name__ == "__main__":
             df2 = conn.execute("SELECT * FROM java_data").fetch_df()
         logging.info("Data added or updated in DuckDB.")
         
+    
+     
+        """
+        Push the processed data to motherduck!
+        """
+
+        if 'MD_TOKEN' in os.environ:
+            token = os.environ['MD_TOKEN']
+        elif 'MD_TOKEN' in environ:  # Assuming you've done "from os import environ" somewhere
+            token = environ['MD_TOKEN']
+        else:
+            token = "Token is not available!"
+            logging.warning("MD_TOKEN not available.")
+        
+        cloud = duckdb.connect(f"md:clouddb?motherduck_token={token}") 
+        cloud.execute("LOAD motherduck")
+        cloud.execute('CREATE OR REPLACE TABLE "clouddb.main.df1" AS SELECT * FROM "df"')
+        # cloud.execute("CREATE OR REPLACE TABLE 'clouddb.main.df1' AS SELECT * FROM 'df'")
+        cloud.execute('CREATE OR REPLACE TABLE "clouddb.main.df2" AS SELECT * FROM "df2"')
+        # cloud.execute("CREATE OR REPLACE TABLE 'clouddb.main.df2' AS SELECT * FROM 'df2'")
+    
     except Exception as e:
         logging.error(f"Error adding/updating data in DuckDB: {e}")
-     
-    """
-    Push the processed data to motherduck!
-    """
-
-    if 'MD_TOKEN' in os.environ:
-        token = os.environ['MD_TOKEN']
-    elif 'MD_TOKEN' in environ:  # Assuming you've done "from os import environ" somewhere
-        token = environ['MD_TOKEN']
-    else:
-        token = "Token is not available!"
-        logging.warning("MD_TOKEN not available.")
-    
-    cloud = duckdb.connect(f"md:clouddb?motherduck_token={token}") 
-    cloud.execute("LOAD motherduck")
-    cloud.execute('CREATE OR REPLACE TABLE "clouddb.main.df1" AS SELECT * FROM "df"')
-    # cloud.execute("CREATE OR REPLACE TABLE 'clouddb.main.df1' AS SELECT * FROM 'df'")
-    cloud.execute('CREATE OR REPLACE TABLE "clouddb.main.df2" AS SELECT * FROM "df2"')
-    # cloud.execute("CREATE OR REPLACE TABLE 'clouddb.main.df2' AS SELECT * FROM 'df2'")
-    
 
     conn.sql("SHOW DATABASES").show()
     cloud.sql("SHOW DATABASES").show()
