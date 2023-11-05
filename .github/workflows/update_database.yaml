@@ -33,7 +33,7 @@ jobs:
       - name: Run ETL process
         run: |
           export MD_TOKEN=${{ secrets.MD_TOKEN }}
-          python extract.py
+          python src/etl/extract.py
 
       # Optionally: Upload the log file as artifact
       - name: Upload log file as artifact
