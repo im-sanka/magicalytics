@@ -6,8 +6,9 @@ upstream = None
 
 # -
 
-from google.cloud import bigquery
 import os
+from google.cloud import bigquery
+from os import environ
 import duckdb
 # import md_token
 import logging
@@ -69,12 +70,12 @@ if __name__ == "__main__":
     Main ETL commands for data ingestion and pushing the table into the clean database.
     """
     try:
-        if "GOOGLE_APPLICATION_CREDENTIALS" not in os.environ:
-            os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/Users/immanuelsanka/Desktop/Medium/magicalytics/.bigquery/magicalytics.json"
+        if "GCP_SA_KEY" not in environ:
+            os.environ["GCP_SA_KEY"] = "/Users/immanuelsanka/Desktop/Medium/magicalytics/.bigquery/magicalytics.json"
+            df = get_data_bigquery("Indonesia", os.environ["GCP_SA_KEY"])
             logging.info("Credentials set successfully.")
-    
-        df = get_data_bigquery("Indonesia", os.environ["GOOGLE_APPLICATION_CREDENTIALS"])
-        logging.info("Data successfully fetched from BigQuery.")
+        else:
+            logging.info("Credentials were not available")
 
         conn = add_or_update_duckdb("clean_data", df, "all")
 
@@ -97,7 +98,7 @@ if __name__ == "__main__":
 
         if 'MD_TOKEN' in os.environ:
             token = os.environ['MD_TOKEN']
-        elif 'MD_TOKEN' in environ:  # Assuming you've done "from os import environ" somewhere
+        elif 'MD_TOKEN' in environ:  
             token = environ['MD_TOKEN']
         else:
             token = "Token is not available!"
