@@ -1,6 +1,6 @@
 # + tags=["parameters"]
 # declare a list tasks whose products you want to use as inputs
-# testing workflow 
+# testing workflow after making the workflow readable and writable
 
 upstream = None
 
