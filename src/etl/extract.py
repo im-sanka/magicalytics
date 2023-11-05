@@ -9,7 +9,7 @@ upstream = None
 from google.cloud import bigquery
 import os
 import duckdb
-import md_token
+# import md_token
 import logging
 
 # +
