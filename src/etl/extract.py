@@ -93,8 +93,6 @@ if __name__ == "__main__":
             conn.execute(f'CREATE OR REPLACE TABLE "java_data" AS {query}')
             df2 = conn.execute("SELECT * FROM java_data").fetch_df()
         logging.info("Data added or updated in DuckDB.")
-        
-    
      
         """
         Push the processed data to motherduck!
@@ -118,8 +116,8 @@ if __name__ == "__main__":
     except Exception as e:
         logging.error(f"Error adding/updating data in DuckDB: {e}")
 
-    conn.sql("SHOW DATABASES").show()
-    cloud.sql("SHOW DATABASES").show()
+    # conn.sql("SHOW DATABASES").show()
+    # cloud.sql("SHOW DATABASES").show()
 
     """
     Close all connections!
