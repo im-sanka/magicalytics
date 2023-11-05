@@ -17,7 +17,8 @@ jobs:
       - name: install python packages
         run: |
           python -m pip install --upgrade pip
-          pip install google-cloud-bigquery duckdb google-auth
+          pip install --upgrade google-auth
+          pip install google-cloud-bigquery duckdb
 
       - name: Set up Google Cloud Credentials
         run: echo "$GCP_SA_KEY" > magicalytics.json
