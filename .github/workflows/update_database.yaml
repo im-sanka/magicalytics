@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: setup python
         uses: actions/setup-python@v4
@@ -28,7 +28,7 @@ jobs:
         run: echo "GOOGLE_APPLICATION_CREDENTIALS=$GITHUB_WORKSPACE/magicalytics.json" >> $GITHUB_ENV
       
       - name: Run the extraction script
-        run: python extract.py
+        run: python src/etl/extract.py
         env:
           MD_TOKEN: ${{ secrets.MD_TOKEN }}
 
