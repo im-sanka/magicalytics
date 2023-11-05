@@ -34,6 +34,8 @@ jobs:
         run: |
           export MD_TOKEN=${{ secrets.MD_TOKEN }}
           python src/etl/extract.py
+        env:
+          GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }} 
 
       # Optionally: Upload the log file as artifact
       - name: Upload log file as artifact
