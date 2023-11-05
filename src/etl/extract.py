@@ -72,10 +72,7 @@ if __name__ == "__main__":
         if "GOOGLE_APPLICATION_CREDENTIALS" not in os.environ:
             os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/Users/immanuelsanka/Desktop/Medium/magicalytics/.bigquery/magicalytics.json"
             logging.info("Credentials set successfully.")
-    except Exception as e:
-        logging.error(f"Error setting credentials: {e}")
-
-    try:
+    
         df = get_data_bigquery("Indonesia", os.environ["GOOGLE_APPLICATION_CREDENTIALS"])
         logging.info("Data successfully fetched from BigQuery.")
 
