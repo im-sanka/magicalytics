@@ -4,3 +4,6 @@
 2023-11-05 05:10:02,707 - INFO - ETL process started.
 2023-11-05 05:10:02,710 - ERROR - Error adding/updating data in DuckDB: This library only supports credentials from google-auth-library-python. See https://google-auth.readthedocs.io/en/latest/ for help on authentication with this library.
 2023-11-05 05:10:02,710 - INFO - ETL process completed successfully.
+2023-11-05 05:21:32,413 - INFO - ETL process started.
+2023-11-05 05:21:32,416 - ERROR - Error adding/updating data in DuckDB: This library only supports credentials from google-auth-library-python. See https://google-auth.readthedocs.io/en/latest/ for help on authentication with this library.
+2023-11-05 05:21:32,416 - INFO - ETL process completed successfully.
