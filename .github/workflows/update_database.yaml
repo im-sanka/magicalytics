@@ -1,9 +1,6 @@
 name: run extract.py
 
-on:
-  push:
-    paths:
-      - 'extract.py'
+on: push
 
 jobs:
   build:
