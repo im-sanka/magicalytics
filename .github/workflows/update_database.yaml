@@ -1,0 +1,37 @@
+name: run extract.py
+
+on:
+  schedule:
+  - cron: '30 5 5 * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v2
+
+      - name: setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      
+      - name: install python packages
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: run extract script
+        env:
+          MD_TOKEN: ${{ secrets.MD_TOKEN }}
+
+      - name: Set up Google Cloud Credentials
+        run: echo "$GCP_SA_KEY" > magicalytics.json
+        env:
+          GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Set Google Application Credentials
+        run: echo "GOOGLE_APPLICATION_CREDENTIALS=$GITHUB_WORKSPACE/magicalytics.json" >> $GITHUB_ENV
+
+
+      
