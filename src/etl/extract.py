@@ -70,6 +70,7 @@ if __name__ == "__main__":
     Main ETL commands for data ingestion and pushing the table into the clean database.
     """
     try:
+        df = get_data_bigquery("Indonesia", environ["GCP_SA_KEY"])
         if "GCP_SA_KEY" not in environ:
             os.environ["GCP_SA_KEY"] = "/Users/immanuelsanka/Desktop/Medium/magicalytics/.bigquery/magicalytics.json"
             df = get_data_bigquery("Indonesia", os.environ["GCP_SA_KEY"])
