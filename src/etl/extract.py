@@ -114,8 +114,10 @@ if __name__ == "__main__":
     
     cloud = duckdb.connect(f"md:clouddb?motherduck_token={token}") 
     cloud.execute("LOAD motherduck")
-    cloud.execute("CREATE OR REPLACE TABLE 'clouddb.main.df1' AS SELECT * FROM 'df'")
-    cloud.execute("CREATE OR REPLACE TABLE 'clouddb.main.df2' AS SELECT * FROM 'df2'")
+    cloud.execute('CREATE OR REPLACE TABLE "clouddb.main.df1" AS SELECT * FROM "df"')
+    # cloud.execute("CREATE OR REPLACE TABLE 'clouddb.main.df1' AS SELECT * FROM 'df'")
+    cloud.execute('CREATE OR REPLACE TABLE "clouddb.main.df2" AS SELECT * FROM "df2"')
+    # cloud.execute("CREATE OR REPLACE TABLE 'clouddb.main.df2' AS SELECT * FROM 'df2'")
     
 
     conn.sql("SHOW DATABASES").show()
