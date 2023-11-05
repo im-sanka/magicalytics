@@ -112,7 +112,9 @@ if __name__ == "__main__":
         # cloud.execute("CREATE OR REPLACE TABLE 'clouddb.main.df1' AS SELECT * FROM 'df'")
         cloud.execute('CREATE OR REPLACE TABLE "clouddb.main.df2" AS SELECT * FROM "df2"')
         # cloud.execute("CREATE OR REPLACE TABLE 'clouddb.main.df2' AS SELECT * FROM 'df2'")
-    
+        
+        conn.close()
+        cloud.close()
     except Exception as e:
         logging.error(f"Error adding/updating data in DuckDB: {e}")
 
@@ -123,8 +125,7 @@ if __name__ == "__main__":
     Close all connections!
     """
 
-    conn.close()
-    cloud.close()
+    
     
     try:
         print("Extract, Transform and Load are done!")
